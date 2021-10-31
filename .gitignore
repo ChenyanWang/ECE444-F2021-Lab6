@@ -1,3 +1,7 @@
-flaskr-tdd/env*
+env
+*.pyc
+*.DS_Store
+__pycache__
+test.db
 flaskr-tdd/.pytest_cache*
 *__pycache__*
