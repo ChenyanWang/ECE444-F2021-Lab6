@@ -14,6 +14,9 @@ pip install pytest==6.1.1
 pip install gunicorn==20.0.4
 pip install Flask-SQLAlchemy==2.5.1
 
+Add heroku postgres:
+heroku addons:create heroku-postgresql:hobby-dev
+
 Set environment variable:
 $Env:FLASK_APP="project/app.py"
 
