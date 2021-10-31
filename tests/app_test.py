@@ -7,6 +7,7 @@ from project.app import app, db
 
 TEST_DB = "test.db"
 
+
 def test_index():
     tester = app.test_client()
     response = tester.get("/", content_type="html/text")
@@ -19,6 +20,7 @@ def test_database():
     init_db()
     assert Path("flaskr.db").is_file()
 
+
 @pytest.fixture
 def client():
     BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,6 +31,7 @@ def client():
     db.create_all()  # setup
     yield app.test_client()  # tests run here
     db.drop_all()  # teardown
+
 
 def login(client, username, password):
     """Login helper function"""
@@ -85,6 +88,7 @@ def test_messages(client):
     assert b"&lt;Hello&gt;" in rv.data
     assert b"<strong>HTML</strong> allowed here" in rv.data
 
+
 def test_delete_message(client):
     """Ensure the messages are being deleted"""
     rv = client.get("/delete/1")
@@ -95,6 +99,7 @@ def test_delete_message(client):
     data = json.loads(rv.data)
     assert data["status"] == 1
 
+
 def test_search(client):
     """Ensure that search works"""
     login(client, app.config["USERNAME"], app.config["PASSWORD"])
@@ -103,8 +108,9 @@ def test_search(client):
         data=dict(title="<TestSearch>", text="<strong>HTML</strong> allowed here"),
         follow_redirects=True,
     )
-    rv = client.get('/search/?query=TestSearch')
-    assert b"TestSearch" in  rv.data
+    rv = client.get("/search/?query=TestSearch")
+    assert b"TestSearch" in rv.data
+
 
 def test_no_login_message(client):
     """Ensure that user cannot post messages if not logged in"""
@@ -114,5 +120,8 @@ def test_no_login_message(client):
         follow_redirects=True,
     )
     assert b"<title>401 Unauthorized</title>" in rv.data
-    assert b"The server could not verify that you are authorized to access the URL requested." in rv.data
+    assert (
+        b"The server could not verify that you are authorized to access the URL requested."
+        in rv.data
+    )
     assert b"&lt;Hello&gt;" not in rv.data
