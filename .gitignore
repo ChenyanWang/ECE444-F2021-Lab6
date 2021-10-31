@@ -1,0 +1,3 @@
+flaskr-tdd/env*
+flaskr-tdd/.pytest_cache*
+*__pycache__*
