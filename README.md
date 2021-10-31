@@ -12,6 +12,7 @@ Install Packages:
 pip install flask==1.1.2  
 pip install pytest==6.1.1
 pip install gunicorn==20.0.4
+pip install Flask-SQLAlchemy==2.5.1
 
 Set environment variable:
 $Env:FLASK_APP="project/app.py"
